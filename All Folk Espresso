@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Folk Espresso - Strathpine's Corner Cafe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c1810;
+            --secondary: #8B4513;
+            --accent: #D4A574;
+            --light: #F5F5DC;
+            --white: #FFFFFF;
+            --dark: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            height: 90vh;
+            background: linear-gradient(135deg, rgba(44, 24, 16, 0.8), rgba(139, 69, 19, 0.7)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%232c1810" width="1200" height="600"/><circle cx="200" cy="150" r="80" fill="%238B4513" opacity="0.3"/><circle cx="800" cy="400" r="120" fill="%23D4A574" opacity="0.2"/><circle cx="1000" cy="200" r="60" fill="%23F5F5DC" opacity="0.15"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212, 165, 116, 0.2) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: var(--light);
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 165, 116, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Menu Preview Section */
+        .menu-preview {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .menu-item h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .menu-item ul {
+            list-style: none;
+            line-height: 2;
+        }
+
+        .menu-item li::before {
+            content: '☕ ';
+            color: var(--accent);
+        }
+
+        /* Hours & Location */
+        .info-section {
+            padding: 5rem 5%;
+            background: var(--white);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            padding: 2.5rem;
+            background: var(--light);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .info-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.2);
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .contact-info p {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--accent);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .live-music {
+            background: rgba(212, 165, 116, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .live-music h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .stars {
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">All Folk Espresso</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>All Folk Espresso</h1>
+            <p>Strathpine's Corner Cafe Serving Exceptional Coffee & Community Vibes</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Visit Us Today</a>
+                <a href="#menu" class="btn btn-secondary">View Menu</a>
+            </div>
+            <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span>4.7 Google Rating</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="about">
+        <h2 class="section-title">Why Choose All Folk Espresso?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">☕</div>
+                <h3>Premium Coffee</h3>
+                <p>Serving Toby's Estate coffee - handcrafted beverages made with care and precision by skilled baristas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🥐</div>
+                <h3>House-Made Pastries</h3>
+                <p>Fresh, locally sourced pastries, brownies, cupcakes, and fruitcake baked daily in-house.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3>Live Music</h3>
+                <p>Enjoy live music performances in the evenings, creating a vibrant and welcoming atmosphere.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3>Warm Community</h3>
+                <p>A cozy corner cafe with a warm, home-like atmosphere and friendly staff who make everyone feel welcome.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🍽️</div>
+                <h3>All-Day Dining</h3>
+                <p>Delicious breakfast and lunch options including pies, cheese toasts, and eggs benedict.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">☀️</div>
+                <h3>Outdoor Seating</h3>
+                <p>Relax at our outdoor tables or cozy up inside - perfect for any weather.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Preview Section -->
+    <section class="menu-preview" id="menu">
+        <h2 class="section-title">Our Menu Highlights</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>Coffee & Beverages</h3>
+                <ul>
+                    <li>Espresso</li>
+                    <li>Latte & Flat White</li>
+                    <li>Oat Vanilla Iced Latte</li>
+                    <li>Dirty Chai</li>
+                    <li>West End Co. Loose Leaf Teas</li>
+                    <li>Hot Chocolate</li>
+                    <li>Juices & Smoothies</li>
+                </ul>
+            </div>
+            <div class="menu-item">
+                <h3>Breakfast & Brunch</h3>
+                <ul>
+                    <li>Eggs Benedict</li>
+                    <li>Cheese Toasts</li>
+                    <li>Croissants</li>
+                    <li>Fresh Wraps</li>
+                    <li>Toasties</li>
+                </ul>
+            </div>
+            <div class="menu-item">
+                <h3>Lunch & Treats</h3>
+                <ul>
+                    <li>Savory Pies</li>
+                    <li>Sandwiches</li>
+                    <li>House-Made Brownies</li>
+                    <li>Cupcakes</li>
+                    <li>Fruitcake</li>
+                    <li>Banana Bread</li>
+                </ul>
+            </div>
+        </div>
+        <div class="live-music">
+            <h4>🎵 Live Music Evenings</h4>
+            <p>Join us for live performances and great vibes!</p>
+        </div>
+    </section>
+
+    <!-- Hours & Location Section -->
+    <section class="info-section" id="contact">
+        <h2 class="section-title">Visit Us</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>📍 Location</h3>
+                <p><strong>533-535 Gympie Road</strong><br>
+                Strathpine, QLD 4500<br>
+                (Corner of Gympie Rd & Buckby St)</p>
+                <div style="margin-top: 1.5rem;">
+                    <p><strong>Service Options:</strong></p>
+                    <p>✓ Dine-In<br>
+                    ✓ Takeaway<br>
+                    ✓ Outdoor Seating</p>
+                </div>
+            </div>
+            <div class="info-card">
+                <h3>🕐 Opening Hours</h3>
+                <ul class="hours-list">
+                    <li><span class="day">Monday</span> <span>6:00 AM - 2:00 PM</span></li>
+                    <li><span class="day">Tuesday</span> <span>6:00 AM - 2:00 PM</span></li>
+                    <li><span class="day">Wednesday</span> <span>6:00 AM - 2:00 PM</span></li>
+                    <li><span class="day">Thursday</span> <span>6:00 AM - 2:00 PM</span></li>
+                    <li><span class="day">Friday</span> <span>6:00 AM - 2:00 PM</span></li>
+                    <li><span class="day">Saturday</span> <span>6:00 AM - 12:00 PM</span></li>
+                    <li><span class="day">Sunday</span> <span>6:00 AM - 12:00 PM</span></li>
+                </ul>
+            </div>
+            <div class="info-card contact-info">
+                <h3>📞 Contact Us</h3>
+                <p><strong>Phone:</strong><br>
+                <a href="tel:0438176784">0438 176 784</a></p>
+                <p><strong>Email:</strong><br>
+                <a href="mailto:allfolkespresso@gmail.com">allfolkespresso@gmail.com</a></p>
+                <p style="margin-top: 2rem; font-style: italic; color: var(--secondary);">
+                    "Not just a cafe - it's a place to enjoy exceptional service, yummy house-made food, and warm community vibes."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>All Folk Espresso</h3>
+            <p>Your Corner Cafe in Strathpine</p>
+            <div class="social-links">
+                <a href="https://facebook.com/allfolkespresso" target="_blank" aria-label="Facebook">📘</a>
+                <a href="https://instagram.com/all_folk_espresso" target="_blank" aria-label="Instagram">📷</a>
+                <a href="mailto:allfolkespresso@gmail.com" aria-label="Email">✉️</a>
+            </div>
+            <p>&copy; 2026 All Folk Espresso. All rights reserved.</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">
+                533-535 Gympie Road, Strathpine QLD 4500 | Phone: 0438 176 784
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.style.padding = '0.5rem 5%';
+            } else {
+                header.style.padding = '1rem 5%';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .menu-item, .info-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
